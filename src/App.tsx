@@ -1,33 +1,39 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { Container } from "react-bootstrap"
+import { Route, Routes } from 'react-router-dom'
+import HomePage from "./Pages/HomePage"
+import NotFound from "./Pages/NotFound"
+import Films from "./Pages/Films"
+import People from "./Pages/People"
+import Planets from "./Pages/Planets"
+import Species from "./Pages/Species"
+import Starships from "./Pages/Starships"
+import Vehicles from "./Pages/Vehicles"
+import Navigation from "./Components/Navigation"
+
 
 function App() {
-  const [count, setCount] = useState(0)
 
   return (
     <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+
+      <div id="App">
+        <Navigation/>
+    
+        <Container>
+          <Routes>
+            <Route path="/" element={<HomePage/>}/>
+            <Route path="/films" element={<Films/>}/>
+            <Route path="/people" element={<People/>}/>
+            <Route path="/planets" element={<Planets/>}/>
+            <Route path="/vehicles" element={<Vehicles/>}/>
+            <Route path="/starships" element={<Starships/>}/>
+            <Route path="/species" element={<Species/>}/>
+
+            <Route path="*" element={<NotFound/>}/>
+
+          </Routes>
+        </Container>
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
     </>
   )
 }
