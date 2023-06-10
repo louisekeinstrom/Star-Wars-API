@@ -6,22 +6,22 @@ const HomePage = () => {
 		<>
 			<h1>Welcome young Skywalker!</h1>
 
-			<Link to="/Films">
+			<Link className='homeCategory' to="/Films">
 				<div>Films</div>
 			</Link>
-			<Link to="/People">
+			<Link className='homeCategory' to="/People">
 				<div>People</div>
 			</Link>
-			<Link to="/Planets">
+			<Link className='homeCategory' to="/Planets">
 				<div>Planets</div>
 			</Link>
-			<Link to="/Species">
+			<Link className='homeCategory' to="/Species">
 				<div>Species</div>
 			</Link>
-			<Link to="/Starships">
+			<Link className='homeCategory' to="/Starships">
 				<div>Starships</div>
 			</Link>
-			<Link to="/Vehicles">
+			<Link className='homeCategory' to="/Vehicles">
 				<div>Vehicles</div>
 			</Link>
 
