@@ -1,4 +1,5 @@
 export type SearchHit = {
+    id: number
     created_at: string
     title: string
     url: string
