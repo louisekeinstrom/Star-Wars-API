@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Button from 'react-bootstrap/Button'
 import Form from 'react-bootstrap/Form'
 import { search } from '../Services/StarWarsAPI'
@@ -6,42 +6,44 @@ import { SearchResponse } from '../types'
 import { ListGroup } from 'react-bootstrap'
 
 const People = () => {
-		// When searching for a specific person, sets the value
-		const [searchInput, setSearchInput] = useState("")
-		// Loading state
-		const [loading, setLoading] = useState(false)
-		// Error handling
-		const [error, setError] = useState<string|null>(null)
-		// Set result for search
-		const [searchResult, setSearchResult] = useState<SearchResponse | null>()
-	
-	
-		// Function to create a searcQuery from input-value
-		const searchValue = async (searchQuery:string) => {
-			setLoading(true)
-			setError(null)
-			setSearchResult(null)
-	
-			try{
-				const data = await search(searchQuery)
-				setSearchResult(data)
-	
-				
-			}catch (err: any){
-				setError(err.message)
-			}
-	
-			// Makes sure loading disappears after function is done
-			setLoading(false)
-	
+	// For setting a resource
+	const [resource, setResource] = useState('posts')
+	const [data, setData] = useState([])
+	// When searching for a specific person, sets the value
+	const [searchInput, setSearchInput] = useState("")
+	// Loading state
+	const [loading, setLoading] = useState(false)
+	// Error handling
+	const [error, setError] = useState<string|null>(null)
+	// Set result for search
+	const [searchResult, setSearchResult] = useState<SearchResponse | null>()
+
+
+	// Function to create a searcQuery from input-value
+	const searchValue = async (searchQuery:string) => {
+		setLoading(true)
+		setError(null)
+		setSearchResult(null)
+
+		try{
+			const data = await search(searchQuery)
+			setSearchResult(data)
+
+		}catch (err: any){
+			setError(err.message)
 		}
-	
-		// runs when submitting
-		const handleSubmit = (e: React.FormEvent) => {
-			e.preventDefault()
-	
-			searchValue(searchInput)
-		}
+
+		// Makes sure loading disappears after function is done
+		setLoading(false)
+
+	}
+
+	// runs when submitting
+	const handleSubmit = (e: React.FormEvent) => {
+		e.preventDefault()
+
+		searchValue(searchInput)
+	}
 
 	return (
 		<>
