@@ -13,7 +13,7 @@ export type SearchResponse = {
     hitsPerPage: number
 }
 
-export type RenderPeople = {
+export type PeopleType = {
     id: number
     name: string
     birth_year: string
@@ -28,5 +28,21 @@ export type RenderPeople = {
     species_count: number
     starships_count: number
     vehicles_count: number
+    homeworld: [{
+        id: number
+        name: string
+    }]
 
+}
+
+export type PagesPeople = {
+    current_page: number
+    people_type: PeopleType
+
+}
+
+// copying res from postman on https://swapi.thehiveresistance.com/api/people
+export type ResultPeople = {
+    current_page: number
+    data: PeopleType[]
 }

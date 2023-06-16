@@ -3,9 +3,27 @@ import Button from 'react-bootstrap/Button'
 import Form from 'react-bootstrap/Form'
 import { search } from '../Services/StarWarsAPI'
 import { SearchResponse } from '../types'
-import { ListGroup } from 'react-bootstrap'
+import { ListGroup, ListGroupItem } from 'react-bootstrap'
+import * as StarWarsApi from '../Services/StarWarsAPI'
+
 
 const People = () => {
+	// function to show all people on the people page
+	const renderPeople = async () => {
+		const allPeople = await StarWarsApi.getAllPeople()
+		console.log('these are all the people', allPeople)
+		allPeople.data.map(person => {
+				<ListGroup.Item
+					action
+					key={person.id}
+				>
+					<h2>${person.name}</h2>
+					<p>${person.created}</p>
+					<p>${person.edited}</p>
+				</ListGroup.Item>
+		})
+	}
+
 	// For setting a resource
 	const [resource, setResource] = useState('posts')
 	const [data, setData] = useState([])
@@ -26,8 +44,10 @@ const People = () => {
 		setSearchResult(null)
 
 		try{
-			const data = await search(searchQuery)
-			setSearchResult(data)
+			console.log('hej')
+			// creates GET-request on search query with pages = 0 as default 
+			const dataQuery = await search(searchQuery)
+			console.log("this is search query", dataQuery)
 
 		}catch (err: any){
 			setError(err.message)
@@ -42,7 +62,16 @@ const People = () => {
 	const handleSubmit = (e: React.FormEvent) => {
 		e.preventDefault()
 
+		if(!searchInput.trim().length){
+			return
+		}
 		searchValue(searchInput)
+		console.log("this is search input",searchInput)
+	}
+
+	const showAll = () => {
+		const peopleData = StarWarsApi.getAllPeople()
+		console.log(peopleData) 
 	}
 
 	return (
@@ -51,7 +80,7 @@ const People = () => {
 
 			{/* input field for searching  */}
 			<Form onSubmit={handleSubmit}>
-				<Form.Group className="mb-4" controlId="searchQuery">
+				<Form.Group className="mb-4" controlId="searchQueryPeople">
 					<Form.Label>Search Here</Form.Label>
 					<Form.Control
 						onChange={e => setSearchInput(e.target.value)}
@@ -64,19 +93,77 @@ const People = () => {
 				<div className="d-flex justify-content-end">
 					<Button
 						type="submit"
+						disabled={!searchInput.trim().length}
 					>Use the Force</Button>
 				</div>
 			</Form>
 
 			{loading && <p>INSERT LOADING ICON HERE</p>}
+			{searchResult == null && 
+			// renderPeople()
+				(
+			<div>
+					{/* <ListGroup>
+						{}
+					</ListGroup> */}
+					hejsan
+				</div>
+			)
+			}
 
-			{searchResult && (
+		{true && (
+				<div id='results'>
+					<p>Showing hits for QUERY</p>
+
+					<ListGroup className='mb-3'>
+					{[{}, {},{}].map(hit => (
+							<ListGroup.Item
+								action
+								href={''}
+								key={''}
+								>
+									<h2>TITLE</h2>
+									<p className='text-muted small'>Created at CREATED</p>
+								</ListGroup.Item>
+						))}
+						{/* {searchResult.hits.map(hit => (
+							<ListGroup.Item
+								action
+								href={hit.url}
+								key={''}
+								>
+									<h2>{hit.title}</h2>
+									<p className='text-muted small'>Created at {hit.created_at}</p>
+								</ListGroup.Item>
+						))} */}
+					</ListGroup>
+
+					<div className='d-flex justify-content-between align-itmes-center mb-3'>
+						<div className="prev"><Button variant='primary'>Previous Page</Button></div>
+					</div>
+					<div className="page">PAGE</div>
+					<div className='mb-3'>
+						<div className="next"><Button variant='primary'>Next Page</Button></div>
+					</div>
+				</div>
+			)}
+
+			{/* {searchResult && (
 				<div id='results'>
 					<p>Showing {searchResult.nbHits} for {searchInput}</p>
 
 					<ListGroup className='mb-3'>
-
-						{searchResult.hits.map(hit => (
+					{[{}, {},{}].map(hit => (
+							<ListGroup.Item
+								action
+								href={''}
+								key={''}
+								>
+									<h2>TITLE</h2>
+									<p className='text-muted small'>Created at CREATED</p>
+								</ListGroup.Item>
+						))}
+						{/* {searchResult.hits.map(hit => (
 							<ListGroup.Item
 								action
 								href={hit.url}
@@ -87,16 +174,10 @@ const People = () => {
 								</ListGroup.Item>
 						))}
 					</ListGroup>
+
+					<div></div>
 				</div>
-			)}
-
-		{/* Rendered names */}
-			<div>
-				<h2>CHARACTER NAME</h2> {/**Insert character name */}
-				<p>Created: CREATED</p>{/**Insert created date */}
-				<p>Edited: EDITED</p>{/**Insert edited date*/}
-
-			</div>
+			)} */}
 
 		</>
 	)
