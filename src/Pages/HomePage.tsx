@@ -1,6 +1,6 @@
+import { Link } from 'react-router-dom'
 import { useEffect, useRef, useState } from 'react'
 import Button from 'react-bootstrap/Button'
-import { Link } from 'react-router-dom'
 import Form from 'react-bootstrap/Form'
 import { search } from '../Services/StarWarsAPI'
 import { SearchResponse } from '../types'
