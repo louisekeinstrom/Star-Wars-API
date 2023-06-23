@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom'
 import { useEffect, useRef, useState } from 'react'
 import Button from 'react-bootstrap/Button'
 import Form from 'react-bootstrap/Form'
-import { search } from '../Services/StarWarsAPI'
+import { search } from '../services/StarWarsAPI'
 import { SearchResponse } from '../types'
 import { ListGroup } from 'react-bootstrap'
 

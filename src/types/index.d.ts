@@ -1,8 +1,7 @@
 export type SearchHit = {
     id: number
     created_at: string
-    title: string
-    url: string
+    name: string
 }
 
 export type SearchResponse = {
@@ -45,4 +44,5 @@ export type PagesPeople = {
 export type ResultPeople = {
     current_page: number
     data: PeopleType[]
+    first_page_url: string
 }

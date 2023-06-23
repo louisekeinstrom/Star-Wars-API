@@ -1,14 +1,14 @@
 import { Container } from "react-bootstrap"
 import { Route, Routes } from 'react-router-dom'
-import HomePage from "./Pages/HomePage"
-import NotFound from "./Pages/NotFound"
-import Films from "./Pages/Films"
-import People from "./Pages/People"
-import Planets from "./Pages/Planets"
-import Species from "./Pages/Species"
-import Starships from "./Pages/Starships"
-import Vehicles from "./Pages/Vehicles"
-import Navigation from "./Components/Navigation"
+import HomePage from "./pages/HomePage"
+import NotFound from "./pages/NotFound"
+import Films from "./pages/Films"
+import People from "./pages/People"
+import Planets from "./pages/Planets"
+import Species from "./pages/Species"
+import Starships from "./pages/Starships"
+import Vehicles from "./pages/Vehicles"
+import Navigation from "./components/Navigation"
 
 
 function App() {

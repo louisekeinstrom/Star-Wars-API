@@ -1,28 +1,37 @@
 import { useState, useEffect } from 'react'
 import Button from 'react-bootstrap/Button'
 import Form from 'react-bootstrap/Form'
-import { search } from '../Services/StarWarsAPI'
+import { search } from '../services/StarWarsAPI'
 import { SearchResponse } from '../types'
 import { ListGroup, ListGroupItem } from 'react-bootstrap'
-import * as StarWarsApi from '../Services/StarWarsAPI'
+import * as StarWarsApi from '../services/StarWarsAPI'
 
 
 const People = () => {
+	// todo:
 	// function to show all people on the people page
-	const renderPeople = async () => {
-		const allPeople = await StarWarsApi.getAllPeople()
-		console.log('these are all the people', allPeople)
-		allPeople.data.map(person => {
-				<ListGroup.Item
-					action
-					key={person.id}
-				>
-					<h2>${person.name}</h2>
-					<p>${person.created}</p>
-					<p>${person.edited}</p>
-				</ListGroup.Item>
-		})
-	}
+	// const renderPeople = async () => {
+	// 	const allPeople = await StarWarsApi.getAllPeople()
+	// 	console.log('these are all the people', allPeople)
+	// 	allPeople.data.map(person => {
+	// 		console.log("test")
+	// 		return (
+	// 			<>
+	// 			<ListGroup.Item
+	// 				action
+	// 				key={person.id}
+	// 				href={allPeople.first_page_url}
+	// 				>
+	// 				<h2>${person.name}</h2>
+	// 				<p>${person.created}</p>
+	// 				<p>${person.edited}</p>
+	// 			</ListGroup.Item>
+	// 				</>
+	// 		)
+			
+	// 	})
+		// console.log("test 2")
+	// }
 
 	// For setting a resource
 	const [resource, setResource] = useState('posts')
@@ -35,8 +44,9 @@ const People = () => {
 	const [error, setError] = useState<string|null>(null)
 	// Set result for search
 	const [searchResult, setSearchResult] = useState<SearchResponse | null>()
-
-
+	
+	
+	
 	// Function to create a searcQuery from input-value
 	const searchValue = async (searchQuery:string) => {
 		setLoading(true)
@@ -45,12 +55,34 @@ const People = () => {
 
 		try{
 			console.log('hej')
-			// creates GET-request on search query with pages = 0 as default 
-			const dataQuery = await search(searchQuery)
-			console.log("this is search query", dataQuery)
+			// connects to API on "people" 
+			const res = await StarWarsApi.searches("people")
+			const peopleArray = await res.data
+			// serches for a name containing searchQuery
+			console.log("this is res:",res)
+			console.log("this is person:",peopleArray)
+			
+			peopleArray.find((person)=>{
+				if(!person.name.match(searchQuery)){
+					console.log("didnt work")
+				}
+
+				try{
+					console.log("this is name",person.name)
+					console.log("this is query:",searchQuery)
+				}catch(err){
+					console.log(err)
+				}
+			})
+			
+			// console.log("this is search query", dataQuery)
+			// setSearchResult(res)
+			// console.log("this is res:",res)
+			
 
 		}catch (err: any){
 			setError(err.message)
+			console.log(error)
 		}
 
 		// Makes sure loading disappears after function is done
@@ -69,11 +101,10 @@ const People = () => {
 		console.log("this is search input",searchInput)
 	}
 
-	const showAll = () => {
-		const peopleData = StarWarsApi.getAllPeople()
-		console.log(peopleData) 
-	}
-
+	// const showAll = () => {
+	// 	const peopleData = StarWarsApi.getAllPeople()
+	// 	console.log(peopleData) 
+	// }
 	return (
 		<>
 			<h1>People</h1>
@@ -99,43 +130,21 @@ const People = () => {
 			</Form>
 
 			{loading && <p>INSERT LOADING ICON HERE</p>}
-			{searchResult == null && 
-			// renderPeople()
-				(
-			<div>
-					{/* <ListGroup>
-						{}
-					</ListGroup> */}
-					hejsan
-				</div>
-			)
-			}
 
-		{true && (
+		{searchResult && (
 				<div id='results'>
-					<p>Showing hits for QUERY</p>
+					<p>Showing {searchResult.nbHits} for {searchInput}</p>
 
 					<ListGroup className='mb-3'>
-					{[{}, {},{}].map(hit => (
+					{searchResult.hits.map(hit => (
 							<ListGroup.Item
 								action
-								href={''}
-								key={''}
+								key={hit.id}
 								>
 									<h2>TITLE</h2>
 									<p className='text-muted small'>Created at CREATED</p>
 								</ListGroup.Item>
 						))}
-						{/* {searchResult.hits.map(hit => (
-							<ListGroup.Item
-								action
-								href={hit.url}
-								key={''}
-								>
-									<h2>{hit.title}</h2>
-									<p className='text-muted small'>Created at {hit.created_at}</p>
-								</ListGroup.Item>
-						))} */}
 					</ListGroup>
 
 					<div className='d-flex justify-content-between align-itmes-center mb-3'>

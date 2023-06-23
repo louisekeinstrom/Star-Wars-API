@@ -3,6 +3,14 @@ import { PagesPeople, ResultPeople, SearchResponse } from "../types"
 
 const BASE_URL = "https://swapi.thehiveresistance.com/api"
 
+const instance = axios.create({
+	baseURL: "https://swapi.thehiveresistance.com/api",
+	timeout: 10000,
+	headers: {
+		"Content-Type": "application/json",
+		"Accept": "application/json"
+	}
+})
 
 	// GENERIC GET-REQUEST
 
@@ -11,9 +19,9 @@ const BASE_URL = "https://swapi.thehiveresistance.com/api"
  * @returns Promise 
  */
 
-export const get = async <T>(endpoint: string) => {
-	const res = await axios.get(BASE_URL + endpoint)
-	return res.data as T
+const get = async <T>(endpoint: string) => {
+	const response = await instance.get(endpoint)
+	return response.data as T
 }
 
 export const getAllPeople = () => {
@@ -29,11 +37,15 @@ export const getAllPeople = () => {
  */
 
 // Searches for a query on page nr. 
-export const search = async ( query: string, page = 0) => {
-	return get<SearchResponse>(`/search?query=${query}&tags=story&page=${page}`)
+export const search = async ( resource:string, query: string, page = 0) => {
+	return get<SearchResponse>(`${resource}/search?query=${query}&page=${page}`)
 }
 
-// Searches for a person on page nr. 
-export const searchPeople = async ( query: string, page = 0) => {
-	return get<SearchResponse>(`people/search?query=${query}&tags=story&page=${page}`)
+export const searches = async ( resource:string,) => {
+	return get<ResultPeople>(`${resource}`)
 }
+
+// // Searches for a person on page nr. 
+// export const searchPeople = async ( query: string, page = 0) => {
+// 	return get<SearchResponse>(`people/search?query=${query}&page=${page}`)
+// }
