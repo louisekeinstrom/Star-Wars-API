@@ -5,7 +5,7 @@ export type SearchHit = {
 }
 
 export type SearchResponse = {
-    hits: SearchHit[]
+    hits: PeopleType[]
     nbHits: number
     page: number
     nbPages: number

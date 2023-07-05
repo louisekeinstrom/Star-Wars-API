@@ -61,18 +61,35 @@ const People = () => {
 			// serches for a name containing searchQuery
 			console.log("this is res:",res)
 			console.log("this is person:",peopleArray)
-			
-			peopleArray.find((person)=>{
-				if(!person.name.match(searchQuery)){
-					console.log("didnt work")
-				}
 
+			let hits:SearchResponse|null
+			let foundArray:[]
+
+			peopleArray.find((person)=>{
+				if(!person.name.includes(searchQuery)){
+					// console.log("didn't match:", person.name)
+					return
+				}
+				
 				try{
-					console.log("this is name",person.name)
-					console.log("this is query:",searchQuery)
+					foundArray.push(person)
+					
+					hits = {
+						hits: foundArray,
+						nbHits: foundArray.length,
+						page: 1,
+						nbPages: 1,
+						hitsPerPage: 1
+					}
+					
+					setSearchResult(hits)
+					// console.log("this is name",person.name)
+					// console.log("this is query:",searchQuery)
+
 				}catch(err){
 					console.log(err)
 				}
+				console.log("found:", searchResult)
 			})
 			
 			// console.log("this is search query", dataQuery)
@@ -136,7 +153,7 @@ const People = () => {
 					<p>Showing {searchResult.nbHits} for {searchInput}</p>
 
 					<ListGroup className='mb-3'>
-					{searchResult.hits.map(hit => (
+					{/* {searchResult.hits.map(hit => (
 							<ListGroup.Item
 								action
 								key={hit.id}
@@ -144,7 +161,7 @@ const People = () => {
 									<h2>TITLE</h2>
 									<p className='text-muted small'>Created at CREATED</p>
 								</ListGroup.Item>
-						))}
+						))} */}
 					</ListGroup>
 
 					<div className='d-flex justify-content-between align-itmes-center mb-3'>
