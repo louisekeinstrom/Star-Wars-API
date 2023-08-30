@@ -65,14 +65,23 @@ const People = () => {
 			let hits:SearchResponse|null
 			let foundArray:[]
 
-			peopleArray.find((person)=>{
+			const foundPerson = peopleArray.find((person)=>{
 				if(!person.name.includes(searchQuery)){
 					// console.log("didn't match:", person.name)
 					return
 				}
 				
 				try{
-					foundArray.push(person)
+					console.log("this is name",person.name)
+					console.log("this is query:",searchQuery)
+
+				}catch(err){
+					console.log(err)
+				}
+				console.log("found:", searchResult)
+			})
+
+			foundArray.push(foundPerson)
 					
 					hits = {
 						hits: foundArray,
@@ -83,14 +92,6 @@ const People = () => {
 					}
 					
 					setSearchResult(hits)
-					// console.log("this is name",person.name)
-					// console.log("this is query:",searchQuery)
-
-				}catch(err){
-					console.log(err)
-				}
-				console.log("found:", searchResult)
-			})
 			
 			// console.log("this is search query", dataQuery)
 			// setSearchResult(res)
