@@ -8,7 +8,7 @@ const useGetAllPeople = () => {
 	const [isError, setIsError] = useState(false)
 	const [isLoading, setIsLoading] = useState(false)
 
-    const getThePeople = async () => {
+    const getAllThePeople = async () => {
         setError(null)
 		setIsError(false)
 		setIsLoading(true)
@@ -26,7 +26,7 @@ const useGetAllPeople = () => {
         setIsLoading(false)
     }
     useEffect(() => {
-        getThePeople()
+        getAllThePeople()
 	}, [])
     
     return {
