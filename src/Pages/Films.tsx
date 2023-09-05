@@ -24,15 +24,15 @@ const Films = () => {
 				<>
 			<p className='d-flex align-content-center justify-content-center'>Have a look at all the films!</p>
 			<div className='d-flex flex-row flex-wrap align-item-center justify-content-center'>
-				{allFilms.map((film:FilmType) => {
+				{allFilms.map((Film:FilmType) => {
 					return(
 						<Card className='m-3' style={{ width: '25%' }}>
-							<Card.Header className='mb-2'>{film.title}</Card.Header>
+							<Card.Header className='mb-2'>{Film.title}</Card.Header>
 							<Card.Body>
-								<Card.Text>{film.opening_crawl}</Card.Text>
+								<Card.Text>{Film.opening_crawl}</Card.Text>
 								<Card.Text></Card.Text>	
 							</Card.Body>
-							<Card.Link as={Link} to={"/films/"+film.id}>
+							<Card.Link as={Link} to={"/films/"+Film.id}>
 							<Button className='m-3' disabled={isLoading} variant="outline-secondary">Read More</Button>
 							</Card.Link>
 						</Card>
