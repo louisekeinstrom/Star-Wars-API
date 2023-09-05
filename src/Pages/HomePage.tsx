@@ -11,7 +11,7 @@ const HomePage = () => {
 
 	return (
 		<>
-			<h1>Welcome young Skywalker!</h1>
+			<h1 className='d-flex mb-5 mt-5 align-content-center justify-content-center'>Welcome young Skywalker!</h1>
 
 			{/* quick links to the films etc. */}
 			<h3>Find everything here:</h3>
