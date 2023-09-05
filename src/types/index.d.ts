@@ -193,7 +193,7 @@ export type SpeciesType = {
     edited: string
     people_count: number
     films_count: number
-    homeworld: ModelType
+    homeworld: ModelType | null
 }
 
 export type SpeciesTypes = SpeciesType[]

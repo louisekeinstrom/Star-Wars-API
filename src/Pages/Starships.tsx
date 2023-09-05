@@ -25,7 +25,8 @@ const Starships = () => {
 						<Card className='m-3' style={{ width: '25%' }}>
 							<Card.Header className='mb-2'>{Starships.name}</Card.Header>
 							<Card.Body>
-								<Card.Text>{Starships.hyperdrive_rating}</Card.Text>
+								<Card.Text>Model: {Starships.model}</Card.Text>
+								<Card.Text>Hyperdrive Rating: {Starships.hyperdrive_rating}</Card.Text>
 								<Card.Text></Card.Text>	
 							</Card.Body>
 							<Card.Link as={Link} to={"/starships/"+Starships.id}>

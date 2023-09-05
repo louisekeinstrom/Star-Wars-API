@@ -25,7 +25,8 @@ const Planets = () => {
 						<Card className='m-3' style={{ width: '25%' }}>
 							<Card.Header className='mb-2'>{planet.name}</Card.Header>
 							<Card.Body>
-								<Card.Text>{planet.population}</Card.Text>
+								<Card.Text>Climate: {planet.climate}</Card.Text>
+								<Card.Text>Population: {planet.population}</Card.Text>
 								<Card.Text></Card.Text>	
 							</Card.Body>
 							<Card.Link as={Link} to={"/planet/"+planet.id}>

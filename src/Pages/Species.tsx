@@ -25,7 +25,8 @@ const Species = () => {
 						<Card className='m-3' style={{ width: '25%' }}>
 							<Card.Header className='mb-2'>{species.name}</Card.Header>
 							<Card.Body>
-								<Card.Text>{species.classification}</Card.Text>
+								<Card.Text>Classification: {species.classification}</Card.Text>
+								<Card.Text>Language: {species.language}</Card.Text>
 								<Card.Text></Card.Text>	
 							</Card.Body>
 							<Card.Link as={Link} to={"/species/"+species.id}>

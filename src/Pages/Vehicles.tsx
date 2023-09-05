@@ -25,7 +25,8 @@ const Vehicles = () => {
 						<Card className='m-3' style={{ width: '25%' }}>
 							<Card.Header className='mb-2'>{Vehicles.name}</Card.Header>
 							<Card.Body>
-								<Card.Text>{Vehicles.max_atmosphering_speed}</Card.Text>
+								<Card.Text>Model: {Vehicles.model}</Card.Text>
+								<Card.Text>Max Atmosphering Speed: {Vehicles.max_atmosphering_speed}</Card.Text>
 								<Card.Text></Card.Text>	
 							</Card.Body>
 							<Card.Link as={Link} to={"/vehicles/"+Vehicles.id}>

@@ -57,6 +57,7 @@ const People = () => {
 				<div className="d-flex justify-content-end">
 					<Button
 						type="submit"
+						variant="outline-secondary"
 						disabled={!searchInput.trim().length}
 						>Use the Force</Button>
 				</div>
@@ -75,7 +76,8 @@ const People = () => {
 							<Card className='m-3' style={{ width: '25%' }} key={person.id}>
 							<Card.Header className='mb-2'>{person.name}</Card.Header>
 							<Card.Body>
-								<Card.Text>Home World: {person.homeworld.name}</Card.Text>
+								<Card.Text>Homeworld: {person.homeworld.name}</Card.Text>
+								<Card.Text>Birth year: {person.birth_year}</Card.Text>
 								<Card.Text></Card.Text>	
 							</Card.Body>
 							<Card.Link as={Link} to={"/people/"+person.id}>
