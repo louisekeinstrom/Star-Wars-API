@@ -1,21 +1,20 @@
 import * as StarWarsAPI from '../services/StarWarsAPI'
-import { StarshipsTypes } from '../types'
 import { useState, useEffect } from "react"
 
-const useGetAllStarships = () => {
-    const [ allStarships, setAllStarships ] = useState<StarshipsTypes|null>(null)
+const useGetOneObject = <T>(endpoint:string) => {
+    const [Data, setData] = useState<T|null>(null)
     const [error, setError] = useState<string|null>(null)
 	const [isError, setIsError] = useState(false)
 	const [isLoading, setIsLoading] = useState(false)
     
-    const getAllTheStarships = async () => {
+    const getAPerson = async () => {
         setError(null)
 		setIsError(false)
 		setIsLoading(true)
+        
         try{
-            const res = await StarWarsAPI.getAllStarships()
-            const data = res.data
-            setAllStarships(data)
+            const res = await StarWarsAPI.getData<T>(endpoint)
+            setData(res)
         }catch(err:any){
             setError(err.message)
             setIsError(true)
@@ -25,15 +24,15 @@ const useGetAllStarships = () => {
     }
     
     useEffect(() => {
-        getAllTheStarships()
+        getAPerson()
 	}, [])
     
     return {
-        allStarships,
+        Data,
         error,
 		isError,
 		isLoading,
     }
 }
 
-export default useGetAllStarships
+export default useGetOneObject

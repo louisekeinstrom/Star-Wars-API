@@ -1,12 +1,16 @@
 import Button from 'react-bootstrap/Button'
 import { Link } from 'react-router-dom'
-import useGetAllStarships from '../hooks/useGetAllStarships'
+import useGetAllData from '../hooks/useGetAllData'
 import { Alert } from 'react-bootstrap'
-import { StarshipsType } from '../types'
+import { StarshipsResponse, StarshipsType } from '../types'
 import { Card } from 'react-bootstrap'
+import Pagination from '../components/Pagination'
+import { useState } from 'react'
 
 const Starships = () => {
-	const { allStarships, isLoading, isError, error } = useGetAllStarships()
+	const { allData, isLoading, isError, error } = useGetAllData<StarshipsResponse>("starships")
+	const [page, setPage] = useState(0)
+	
 	return (
 		<>
 			<h1 className='d-flex mb-5 mt-5 align-content-center justify-content-center'>Starships</h1>
@@ -16,30 +20,39 @@ const Starships = () => {
 			
 			{isError === true && <Alert variant="warning">{error}</Alert>}
 			
-			{allStarships && (
+			{allData && (
 				<>
-			<p className='d-flex align-content-center justify-content-center'>Have a look at all the Starships!</p>
-			<div className='d-flex flex-row flex-wrap align-item-center justify-content-center'>
-				{allStarships.map((Starships:StarshipsType) => {
-					return(
-						<Card className='m-3' style={{ width: '25%' }}>
-							<Card.Header className='mb-2'>{Starships.name}</Card.Header>
-							<Card.Body>
-								<Card.Text>Model: {Starships.model}</Card.Text>
-								<Card.Text>Hyperdrive Rating: {Starships.hyperdrive_rating}</Card.Text>
-								<Card.Text></Card.Text>	
-							</Card.Body>
-							<Card.Link as={Link} to={"/starships/"+Starships.id}>
-							<Button className='m-3' disabled={isLoading} variant="outline-secondary">Read More</Button>
-							</Card.Link>
-						</Card>
-					)
-				})}
+					<p className='d-flex align-content-center justify-content-center'>Have a look at all the Starships!</p>
+					<div className='d-flex flex-row flex-wrap align-item-center justify-content-center'>
+						{allData.data.map((Starships:StarshipsType) => {
+							return(
+								<Card className='m-3' style={{ width: '25%' }} key={Starships.id}>
+									<Card.Header className='mb-2'>{Starships.name}</Card.Header>
+									<Card.Body>
+										<Card.Text>Model: {Starships.model}</Card.Text>
+										<Card.Text>Hyperdrive Rating: {Starships.hyperdrive_rating}</Card.Text>
+										<Card.Text></Card.Text>	
+									</Card.Body>
+									<Card.Link as={Link} to={"/starships/"+Starships.id}>
+									<Button className='m-3' disabled={isLoading} variant="outline-secondary">Read More</Button>
+									</Card.Link>
+								</Card>
+							)
+						})}
+					</div>
+					<div className='m-5'>
+						<Pagination
+							page={allData.current_page}
+							totalPages={allData.last_page}
+							hasPreviousPage={page > 0}
+							hasNextPage={page + 1 < allData.last_page}
+							onPreviousPage={() => { setPage(prevValue => prevValue - 1) }}
+							onNextPage={() => { setPage(prevValue => prevValue + 1) }}
+						/>
+					</div>
+				</>
+			)}
 			</div>
-			</>
-			)
-			}
-		</div>
 		</>
 	)
 }

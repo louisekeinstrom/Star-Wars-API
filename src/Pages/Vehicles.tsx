@@ -1,12 +1,16 @@
 import Button from 'react-bootstrap/Button'
 import { Link } from 'react-router-dom'
-import useGetAllVehicles from '../hooks/useGetAllVehicles'
+import useGetAllData from '../hooks/useGetAllData'
 import { Alert } from 'react-bootstrap'
-import { VehiclesType } from '../types'
+import { VehiclesResponse, VehiclesType } from '../types'
 import { Card } from 'react-bootstrap'
+import Pagination from '../components/Pagination'
+import { useState } from 'react'
 
 const Vehicles = () => {
-	const { allVehicles, isLoading, isError, error } = useGetAllVehicles()
+	const { allData, isLoading, isError, error } = useGetAllData<VehiclesResponse>("vehicles")
+	const [page, setPage] = useState(0)
+	
 	return (
 		<>
 			<h1 className='d-flex mb-5 mt-5 align-content-center justify-content-center'>Vehicles</h1>
@@ -16,13 +20,13 @@ const Vehicles = () => {
 			
 			{isError === true && <Alert variant="warning">{error}</Alert>}
 			
-			{allVehicles && (
+			{allData && (
 				<>
 			<p className='d-flex align-content-center justify-content-center'>Have a look at all the Vehicles!</p>
 			<div className='d-flex flex-row flex-wrap align-item-center justify-content-center'>
-				{allVehicles.map((Vehicles:VehiclesType) => {
+				{allData.data.map((Vehicles:VehiclesType) => {
 					return(
-						<Card className='m-3' style={{ width: '25%' }}>
+						<Card className='m-3' style={{ width: '25%' }} key={Vehicles.id}>
 							<Card.Header className='mb-2'>{Vehicles.name}</Card.Header>
 							<Card.Body>
 								<Card.Text>Model: {Vehicles.model}</Card.Text>
@@ -36,9 +40,18 @@ const Vehicles = () => {
 					)
 				})}
 			</div>
+			<div className='m-5'>
+				<Pagination
+					page={allData.current_page}
+					totalPages={allData.last_page}
+					hasPreviousPage={page > 0}
+					hasNextPage={page + 1 < allData.last_page}
+					onPreviousPage={() => { setPage(prevValue => prevValue - 1) }}
+					onNextPage={() => { setPage(prevValue => prevValue + 1) }}
+				/>
+			</div>
 			</>
-			)
-			}
+			)}
 		</div>
 		</>
 	)

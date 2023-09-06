@@ -12,6 +12,24 @@ export type SearchResponse = {
     hitsPerPage: number
 }
 
+export type OnePersonResponse = {
+    id: number
+    name: string
+    birth_year: string
+    eye_color: string
+    hair_color: string
+    height: string
+    mass: string
+    skin_color: string
+    created: string
+    edited: string
+    homeworld: ModelType
+    films: ModelTypes
+    species: ModelTypes | []
+    starships: ModelTypes | []
+    vehicles: ModelTypes | []
+}
+
 export type PeopleType = {
     id: number
     name: string
@@ -159,6 +177,38 @@ export type PlanetType = {
 }
 
 export type PlanetTypes = PlanetType[]
+
+export type OnePlanetResponse = {
+    id: number
+    name: string
+    rotation_period: string
+    orbital_period: string
+    diameter: string
+    climate: string
+    gravity: string
+    terrain: string
+    surface_water: string
+    population: string
+    created: string
+    edited: string
+    residents: ResidentsTypes
+    films: ModelTypes
+}
+
+export type ResidentsType = {
+    id: number
+    name: string
+    birth_year: string
+    eye_color: string
+    hair_color: string
+    height: string
+    mass: string
+    skin_color: string
+    created: string
+    edited: string
+}
+
+export type ResidentsTypes = ResidentsType[]
 
 // SPECIES
 

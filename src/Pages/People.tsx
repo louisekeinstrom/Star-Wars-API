@@ -2,12 +2,13 @@ import { useState, useEffect } from 'react'
 import Button from 'react-bootstrap/Button'
 import Form from 'react-bootstrap/Form'
 import { search } from '../services/StarWarsAPI'
-import { PeopleType, SearchResponse } from '../types'
+import { PeopleResponse, PeopleType, SearchResponse } from '../types'
 import { ListGroup, ListGroupItem } from 'react-bootstrap'
 import * as StarWarsApi from '../services/StarWarsAPI'
-import useGetAllPeople from '../hooks/useGetAllPeople'
+import useGetAllData from '../hooks/useGetAllData'
 import { Card } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
+import Pagination from '../components/Pagination'
 
 
 const People = () => {
@@ -15,7 +16,9 @@ const People = () => {
 	const [searchInput, setSearchInput] = useState("")
 	// Set result for search
 	const [searchResult, setSearchResult] = useState<SearchResponse | null>()
-	const {allPeople, isError, error, isLoading} = useGetAllPeople()
+	const { allData, isLoading, isError, error } = useGetAllData<PeopleResponse>("people")
+	const [page, setPage] = useState(0)
+
 	
 	
 	// Function to create a searcQuery from input-value
@@ -66,12 +69,12 @@ const People = () => {
 
 			{isLoading && <p className='d-flex align-content-center justify-content-center'>INSERT LOADING ICON HERE</p>}
 
-			{allPeople && (
+			{allData && (
 				<>
 				<div>
 				<p className='d-flex align-content-center justify-content-center'>People of the jedi-verse</p>
 				<div className='d-flex flex-row flex-wrap align-item-center justify-content-center'>
-					{allPeople.map((person:PeopleType) => {
+					{allData.data.map((person:PeopleType) => {
 						return(
 							<Card className='m-3' style={{ width: '25%' }} key={person.id}>
 							<Card.Header className='mb-2'>{person.name}</Card.Header>
@@ -87,6 +90,16 @@ const People = () => {
 						)
 					})}
 				</div>
+				</div>
+				<div className='m-5'>
+					<Pagination
+						page={allData.current_page}
+						totalPages={allData.last_page}
+						hasPreviousPage={page > 0}
+						hasNextPage={page + 1 < allData.last_page}
+						onPreviousPage={() => { setPage(prevValue => prevValue - 1) }}
+						onNextPage={() => { setPage(prevValue => prevValue + 1) }}
+					/>
 				</div>
 			</>
 			)}
