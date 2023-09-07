@@ -12,6 +12,9 @@ import Navigation from "./components/Navigation"
 import OneFilm from "./pages/OneFilm"
 import OnePerson from "./pages/OnePerson"
 import OnePlanet from "./pages/OnePlanet"
+import OneSpecies from "./pages/OneSpecies"
+import OneStarship from "./pages/OneStarship"
+import OneVehicle from "./pages/OneVehicle"
 
 
 function App() {
@@ -31,8 +34,12 @@ function App() {
             <Route path="/planets" element={<Planets/>}/>
             <Route path="/planets/:id" element={<OnePlanet/>}/>
             <Route path="/vehicles" element={<Vehicles/>}/>
+            <Route path="/vehicles/:id" element={<OneVehicle/>}/>
             <Route path="/starships" element={<Starships/>}/>
+            <Route path="/starships/:id" element={<OneStarship/>}/>
             <Route path="/species" element={<Species/>}/>
+            <Route path="/species/:id" element={<OneSpecies/>}/>
+
 
             <Route path="*" element={<NotFound/>}/>
 

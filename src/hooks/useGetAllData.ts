@@ -1,7 +1,6 @@
 import * as StarWarsAPI from '../services/StarWarsAPI'
 import { useState, useEffect } from "react"
 
-
 const useGetAllData = <T>(endpoint:string) => {
     const [allData, setAllData] = useState< T | null >(null)
     const [error, setError] = useState< string | null >(null)
@@ -32,7 +31,7 @@ const useGetAllData = <T>(endpoint:string) => {
         allData,
         error,
 		isError,
-		isLoading,
+		isLoading
     }
 }
 

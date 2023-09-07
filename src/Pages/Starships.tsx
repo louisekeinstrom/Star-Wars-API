@@ -8,13 +8,17 @@ import Pagination from '../components/Pagination'
 import { useState } from 'react'
 
 const Starships = () => {
-	const { allData, isLoading, isError, error } = useGetAllData<StarshipsResponse>("starships")
-	const [page, setPage] = useState(0)
-	
+	const [page, setPage] = useState(1)
+	const { allData, 
+			isLoading, 
+			isError, 
+			error } = useGetAllData<StarshipsResponse>(`/starships?page=${page}`)
+	console.log("pagenr", page)
+	console.log("data",allData)
+
 	return (
 		<>
 			<h1 className='d-flex mb-5 mt-5 align-content-center justify-content-center'>Starships</h1>
-			<div className='d-flex-column m-2 justify-content-center'>
 			
 			{isLoading && <p className='d-flex align-content-center justify-content-center'>Loading...</p>}
 			
@@ -31,10 +35,13 @@ const Starships = () => {
 									<Card.Body>
 										<Card.Text>Model: {Starships.model}</Card.Text>
 										<Card.Text>Hyperdrive Rating: {Starships.hyperdrive_rating}</Card.Text>
-										<Card.Text></Card.Text>	
 									</Card.Body>
 									<Card.Link as={Link} to={"/starships/"+Starships.id}>
-									<Button className='m-3' disabled={isLoading} variant="outline-secondary">Read More</Button>
+										<Button className='m-3' 
+												disabled={isLoading} 
+												variant="outline-secondary">
+													Read More
+										</Button>
 									</Card.Link>
 								</Card>
 							)
@@ -42,7 +49,7 @@ const Starships = () => {
 					</div>
 					<div className='m-5'>
 						<Pagination
-							page={allData.current_page}
+							page={page + 1}
 							totalPages={allData.last_page}
 							hasPreviousPage={page > 0}
 							hasNextPage={page + 1 < allData.last_page}
@@ -52,7 +59,6 @@ const Starships = () => {
 					</div>
 				</>
 			)}
-			</div>
 		</>
 	)
 }

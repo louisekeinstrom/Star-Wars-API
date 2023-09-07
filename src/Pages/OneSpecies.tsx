@@ -1,62 +1,91 @@
 import { useParams } from "react-router"
 import useGetOneObject from "../hooks/useGetOneObject"
-import { Alert, Card } from "react-bootstrap"
-import { ModelType, OnePersonResponse } from "../types"
+import { Alert, ListGroup } from "react-bootstrap"
+import { ModelFilmType, ModelType, OneSpeciesResponse } from "../types"
+import { Link } from "react-router-dom"
 
 
-const OneFilm = () => {
+const OneSpecies = () => {
     const { id } = useParams()
 	const dataId = Number(id)
-	const { Data, isLoading, isError, error } = useGetOneObject<OnePersonResponse>("people", dataId)
-
+	const { Data, 
+            isLoading, 
+            isError, 
+            error } = useGetOneObject<OneSpeciesResponse>(`species/${dataId}`)
+	
 
 	console.log(Data)
 	
 	return(
 		<>
-			
 			{isLoading && <p className='d-flex align-content-center justify-content-center'>Loading...</p>}
 			
 			{isError === true && <Alert variant="warning">{error}</Alert>}
 			
 			{Data && (
-            <>
-			<h1 className='d-flex mb-5 mt-5 align-content-center justify-content-center'>{Data.name}</h1>
-			<div className='d-flex-column m-2 justify-content-center'>
-                <div>
-                    <p>Birth year: {Data.birth_year}</p>
-                    <p>Eye color: {Data.eye_color}</p>
-                    <p>Hair color: {Data.hair_color}</p>
-                    <p>Hair color: {Data.height} cm</p>
-                    <p>Mass: {Data.mass} kg</p>
-                    <p>Skin color: {Data.skin_color}</p>
-                    <p>Hair color: {Data.hair_color}</p>
-                    <p>Homeworld: {Data.homeworld.name}</p>
-                </div>
-                    <div className="d-flex align-content-center justify-content-center flex-wrap m-5">
-                        <div className="m-5">
-                            <h2>Films: </h2>
-                            {Data.films.map((data:ModelType) => <p>{data.name}</p>)}
+                <>
+			        <h1 className='d-flex mb-5 mt-5 align-content-center justify-content-center'>{Data.name}</h1>
+			        <div className='d-flex-column m-2 justify-content-center'>
+                        <div>
+                            <p style={{textTransform: 'capitalize'}}>Classification: {Data.classification}</p>
+                            <p style={{textTransform: 'capitalize'}}>Designation: {Data.designation}</p>
+                            <p>Average height: {Data.average_height} cm</p>
+                            <p>Average Lifespan: {Data.average_lifespan} years</p>
+                            <p style={{textTransform: 'capitalize'}}>Eye colors: {Data.eye_colors}</p>
+                            <p style={{textTransform: 'capitalize'}}>Skin colors: {Data.skin_colors}</p>
+                            <p style={{textTransform: 'capitalize'}}>Hair colors: {Data.hair_colors}</p>
+                            <p style={{textTransform: 'capitalize'}}>Language: {Data.language}</p>
+                            <p style={{textTransform: 'capitalize'}}>Created: {Data.created}</p>
+                            <p style={{textTransform: 'capitalize'}}>Edited: {Data.edited}</p>
+                            {!Data.homeworld === null && (<p>Homeworld: {Data.homeworld!.name}</p>)}
                         </div>
-                        <div className="m-5">
-                            <h2>Species: </h2>
-                            {Data.species.map((data:ModelType) => <p>{data.name}</p>)}
+                        <div className="d-flex align-content-center justify-content-center flex-wrap m-5">
+                            <ListGroup>
+                                <div className="m-5">
+                                    {Data.people.length > 0 && (
+                                        <>
+                                            <h2 key={Data.id}>People: </h2>
+                                            <ListGroup className="m-2">
+                                                {Data.people.map((data:ModelType) => 
+                                                    <ListGroup.Item 
+                                                        className="m-3"
+                                                        action
+                                                        as={Link}
+                                                        key={data.id}
+                                                        to={"/people/" + data.id}>{data.name}
+                                                    </ListGroup.Item>
+                                                )}
+                                            </ListGroup>
+                                        </>
+                                    )}
+                                </div>
+                            </ListGroup>
+                            <ListGroup>
+                                <div className="m-5">
+                                    {Data.films.length > 0 && (
+                                        <>
+                                            <h2 key={Data.id}>Films: </h2>
+                                            <ListGroup className="m-2">
+                                                {Data.films.map((data:ModelFilmType) => 
+                                                    <ListGroup.Item 
+                                                        className="m-3"
+                                                        action
+                                                        as={Link}
+                                                        key={data.id}
+                                                        to={"/films/" + data.id}>{data.title}
+                                                    </ListGroup.Item>
+                                                )}
+                                            </ListGroup>
+                                        </>
+                                    )}
+                                </div>
+                            </ListGroup>
                         </div>
-                        <div className="m-5">
-                            <h2>Starships: </h2>
-                            {Data.starships.map((data:ModelType) => <p>{data.name}</p>)}
-                        </div>
-                        <div className="m-5">
-                            <h2>Vehicles: </h2>
-                            {Data.vehicles.map((data:ModelType) => <p>{data.name}</p>)}
-                        </div>
-                    </div>
-		        </div>
-			</>
+		            </div>
+			    </>
 			)}
 		</>
-	
 	)
-	}
+}
 
-export default OneFilm
+export default OneSpecies

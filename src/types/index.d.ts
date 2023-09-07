@@ -23,8 +23,8 @@ export type OnePersonResponse = {
     skin_color: string
     created: string
     edited: string
-    homeworld: ModelType
-    films: ModelTypes
+    homeworld: ModelType | null
+    films: ModelFilmTypes
     species: ModelTypes | []
     starships: ModelTypes | []
     vehicles: ModelTypes | []
@@ -192,7 +192,7 @@ export type OnePlanetResponse = {
     created: string
     edited: string
     residents: ResidentsTypes
-    films: ModelTypes
+    films: ModelFilmTypes
 }
 
 export type ResidentsType = {
@@ -248,6 +248,24 @@ export type SpeciesType = {
 
 export type SpeciesTypes = SpeciesType[]
 
+export type OneSpeciesResponse = {
+    id: number
+    name: string
+    classification: string
+    designation: string
+    average_height: string
+    average_lifespan: string
+    eye_colors: string
+    hair_colors: string
+    skin_colors: string
+    language: string
+    created: string
+    edited: string
+    people: ModelTypes
+    homeworld: ModelType | null
+    films: ModelFilmTypes
+}
+
 //  VEHICLES
 export type VehiclesResponse = {
     current_page: number
@@ -285,6 +303,25 @@ export type VehiclesType = {
 }
 
 export type VehiclesTypes = VehiclesType[]
+
+export type OneVehicleResponse = {
+    id: number,
+    name: string,
+    model: string,
+    vehicle_class: string,
+    manufacturer: string,
+    length: string,
+    cost_in_credits: string,
+    crew: string,
+    passengers: string,
+    max_atmosphering_speed: string,
+    cargo_capacity: string,
+    consumables: string,
+    created: string,
+    edited: string,
+    pilots: ModelTypes | [],
+    films: ModelFilmTypes
+}
 
 // STARSHIPS
 export type StarshipsResponse = {
@@ -326,9 +363,38 @@ export type StarshipsType = {
 
 export type StarshipsTypes = StarshipsType[]
 
+export type OneStarshipResponse = {
+    id: number,
+    name: string,
+    model: string,
+    starship_class: string,
+    manufacturer: string,
+    cost_in_credits: string,
+    length: string,
+    crew: string,
+    passengers: string,
+    max_atmosphering_speed: string,
+    hyperdrive_rating: string,
+    MGLT: string,
+    cargo_capacity: string,
+    consumables: string,
+    created: string,
+    edited: string,
+    pilots: ModelTypes | [],
+    films: ModelFilmTypes
+}
+
+
+// GENERIC TYPES
 export type ModelType = {
     id: number
     name: string | null
 }
 
+export type ModelFilmType = {
+    id: number
+    title: string | null
+}
+
 export type ModelTypes = ModelType[]
+export type ModelFilmTypes = ModelFilmType[]

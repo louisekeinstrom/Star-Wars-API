@@ -7,7 +7,7 @@ const useGetOneObject = <T>(endpoint:string) => {
 	const [isError, setIsError] = useState(false)
 	const [isLoading, setIsLoading] = useState(false)
     
-    const getAPerson = async () => {
+    const getAnObject = async () => {
         setError(null)
 		setIsError(false)
 		setIsLoading(true)
@@ -24,7 +24,7 @@ const useGetOneObject = <T>(endpoint:string) => {
     }
     
     useEffect(() => {
-        getAPerson()
+        getAnObject()
 	}, [])
     
     return {

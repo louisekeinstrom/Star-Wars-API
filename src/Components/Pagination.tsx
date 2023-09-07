@@ -24,20 +24,22 @@ const Pagination: React.FC<IPaginationProps> = ({
 				<Button
 					disabled={!hasPreviousPage}
 					onClick={onPreviousPage}
-					variant="outline-secondary"
-				>Previous Page</Button>
+					variant="outline-secondary">
+                        Previous Page
+                </Button>
 			</div>
-
-			<div className="page">Page {page}/{totalPages}</div>
-
-			<div className="next">
-				<Button
-					disabled={!hasNextPage}
-					onClick={onNextPage}
-					variant="outline-secondary"
-				>Next Page</Button>
-			</div>
-		</div>
+			<div className="page">
+                Page {page}/{totalPages}
+            </div>
+            <div className="next">
+                <Button
+                    disabled={!hasNextPage}
+                    onClick={onNextPage}
+                    variant="outline-secondary">
+                        Next Page
+                </Button>
+            </div>
+		    </div>
 	)
 }
 
