@@ -7,11 +7,11 @@ const Navigation = () => {
 	return (
 		<Navbar bg="dark" variant="dark" expand="md">
 			<Container>
-				<Navbar.Brand as={Link} to="/">Star Wars Encyclopedia</Navbar.Brand>
+				<Navbar.Brand id='logo' as={Link} to="/">Star Wars Encyclopedia</Navbar.Brand>
 
 				<Navbar.Toggle aria-controls="basic-navbar-nav" />
 				<Navbar.Collapse id="basic-navbar-nav">
-					<Nav className="ms-auto">
+					<Nav className="nav-bar ms-auto">
 						<Nav.Link as={NavLink} end to="/films?page=1">Films</Nav.Link>
 						<Nav.Link as={NavLink} end to="/people?page=1">People</Nav.Link>
 						<Nav.Link as={NavLink} end to="/planets?page=1">Planets</Nav.Link>

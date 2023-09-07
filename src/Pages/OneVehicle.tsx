@@ -3,7 +3,7 @@ import useGetOneObject from "../hooks/useGetOneObject"
 import { Alert, ListGroup } from "react-bootstrap"
 import { ModelType, OneVehicleResponse, ModelFilmType } from "../types"
 import { Link } from "react-router-dom"
-
+import Spinner from 'react-bootstrap/Spinner'
 
 const OneVehicle = () => {
     const { id } = useParams()
@@ -11,11 +11,11 @@ const OneVehicle = () => {
 	const { Data, 
             isLoading, 
             isError, 
-            error } = useGetOneObject<OneVehicleResponse>(`starships/${dataId}`)
+            error } = useGetOneObject<OneVehicleResponse>(`vehicles/${dataId}`)
 	
 	return(
 		<>
-			{isLoading && <p className='d-flex align-content-center justify-content-center'>Loading...</p>}
+			{isLoading && <Spinner className='d-flex align-content-center justify-content-center' animation="grow" variant="dark"/>}
 			
 			{isError === true && <Alert variant="warning">{error}</Alert>}
 			
@@ -23,21 +23,20 @@ const OneVehicle = () => {
                 <>
 			        <h1 className='d-flex mb-5 mt-5 align-content-center justify-content-center'>{Data.name}</h1>
 			        <div className='d-flex-column m-2 justify-content-center'>
-                        <div>
-                        <p>Model: {Data.model}</p>
-                        <p>Vehicle Class: {Data.vehicle_class}</p>
-                        <p>Manufacturer: {Data.manufacturer}</p>
-                        <p>Cost in Credits: {Data.cost_in_credits} Credits</p>
-                        <p>Length: {Data.length}</p>
-                        <p>Crew: {Data.crew}</p>
-                        <p>Passengers: {Data.passengers}</p>
-                        <p>Max atmosphering speed: {Data.max_atmosphering_speed}</p>
-                        <p>Cargo capacity: {Data.cargo_capacity}</p>
-                        <p>Consumables: {Data.consumables}</p>
-                        <p>Created: {Data.created}</p>
-                        <p>Edited: {Data.edited}</p>
+                        <div className="information">
+                            <h2>Vehicle Details</h2>
+                            <p style={{textTransform: 'capitalize'}}>Model: {Data.model}</p>
+                            <p style={{textTransform: 'capitalize'}}>Vehicle Class: {Data.vehicle_class}</p>
+                            <p style={{textTransform: 'capitalize'}}>Manufacturer: {Data.manufacturer}</p>
+                            <p style={{textTransform: 'capitalize'}}>Cost in Credits: {Data.cost_in_credits} Credits</p>
+                            <p style={{textTransform: 'capitalize'}}>Length: {Data.length}</p>
+                            <p style={{textTransform: 'capitalize'}}>Crew: {Data.crew}</p>
+                            <p style={{textTransform: 'capitalize'}}>Passengers: {Data.passengers}</p>
+                            <p style={{textTransform: 'capitalize'}}>Max atmosphering speed: {Data.max_atmosphering_speed}</p>
+                            <p style={{textTransform: 'capitalize'}}>Cargo capacity: {Data.cargo_capacity}</p>
+                            <p style={{textTransform: 'capitalize'}}>Consumables: {Data.consumables}</p>
                         </div>
-                        <div className="d-flex align-content-center justify-content-center flex-wrap m-5">
+                        <div className="list-group flex-wrap m-5">
                             <div className="m-5">
                                 {Data.films.length > 0 && (
                                     <>
@@ -45,7 +44,7 @@ const OneVehicle = () => {
                                         <ListGroup className="m-2">
                                             {Data.films.map((data:ModelFilmType) => 
                                                 <ListGroup.Item 
-                                                    className="m-3"
+                                                    className="item"
                                                     action
                                                     as={Link}
                                                     key={data.id}
@@ -63,7 +62,7 @@ const OneVehicle = () => {
                                         <ListGroup className="m-2">
                                         {Data.pilots.map((data:ModelType) => 
                                             <ListGroup.Item 
-                                                className="m-3"
+                                                className="item"
                                                 action
                                                 as={Link}
                                                 key={data.id}
@@ -75,6 +74,8 @@ const OneVehicle = () => {
                                 )}
                             </div>
                         </div>
+                        <p className="muted">Created: {Data.created}</p>
+                        <p className="muted">Edited: {Data.edited}</p>
 		            </div>
 			    </>
 			)}

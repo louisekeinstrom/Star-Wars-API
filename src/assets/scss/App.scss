@@ -1,1 +1,92 @@
-@import "bootstrap/scss/bootstrap"
+@import "bootstrap/scss/bootstrap";
+
+body {
+    background-image: url("../images/pexels-aleksandar-pasaric-1694000.jpg");
+}
+
+h1 {
+    font-family: 'Cairo', sans-serif;
+    font-weight: 900;
+    color: gold;
+}
+
+h2, h3, h4 {
+    color: gold;
+    font-family: 'Cairo', sans-serif;
+}
+
+p, .nav-bar {
+    color: white;
+    font-family: 'Rajdhani', sans-serif;
+    font-size: large;
+}
+
+#logo {
+    font-family: 'Cairo', sans-serif;
+    font-weight: 900;
+    color: gold;
+    font-size: 30px;
+}
+
+#container {
+    width: 70%;
+    background-color: black;
+    padding: 20px;
+}
+
+.Star-Wars-Card {
+    background-color: #212529;
+}
+
+.Star-Wars-Text {
+    font-family: 'Cairo', sans-serif;
+    color: gold;
+    font-size: larger;
+
+}
+
+.page, .prev, .next, .read-more-btn{
+    color: gold;
+    font-family: 'Cairo', sans-serif;
+}
+
+.more-btn {
+    font-family: 'Cairo', sans-serif;
+
+}
+
+.muted {
+    color: #212529;
+    text-align: center;
+}
+
+.item {
+    background-color: #212529;
+    border-color: grey;
+    font-family: 'Cairo', sans-serif;
+    color: white;
+}
+
+.item:hover {
+    background-color: gold;
+}
+
+.information {
+    text-align: center;
+    padding: 30px;
+}
+
+.list-group {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 90%;
+}
+
+.home-page-menu {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    font-size: x-large;
+}

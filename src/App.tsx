@@ -24,7 +24,7 @@ function App() {
 
       <div id="App">
         <Navigation/>
-        <Container>
+        <Container id="container">
           <Routes>
             <Route path="/" element={<HomePage/>}/>
             <Route path="/films" element={<Films/>}/>

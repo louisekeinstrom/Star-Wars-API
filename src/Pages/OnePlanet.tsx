@@ -3,8 +3,7 @@ import useGetOneObject from "../hooks/useGetOneObject"
 import { Alert, ListGroup } from "react-bootstrap"
 import { ModelFilmType, OnePlanetResponse, ResidentsType } from "../types"
 import { Link } from "react-router-dom"
-
-
+import Spinner from 'react-bootstrap/Spinner'
 
 const OnePlanet = () => {
     const { id } = useParams()
@@ -16,7 +15,7 @@ const OnePlanet = () => {
 	
 	return(
 		<>
-			{isLoading && <p className='d-flex align-content-center justify-content-center'>Loading...</p>}
+			{isLoading && <Spinner className='d-flex align-content-center justify-content-center' animation="grow" variant="dark"/>}
 			
 			{isError && <Alert variant="warning">{error}</Alert>}
 			
@@ -24,17 +23,18 @@ const OnePlanet = () => {
                 <>
 			        <h1 className='d-flex mb-5 mt-5 align-content-center justify-content-center'>{Data.name}</h1>
 			        <div className='d-flex-column m-2 justify-content-center'>
-                        <div>
-                            <p>Rotation period: {Data.rotation_period}</p>
-                            <p>Orbital period: {Data.orbital_period}</p>
-                            <p>Diameter: {Data.diameter}</p>
-                            <p>Climate: {Data.climate}</p>
+                        <div className="information">
+                            <h2>Planetary information</h2>
+                            <p style={{textTransform: 'capitalize'}}>Rotation period: {Data.rotation_period}</p>
+                            <p style={{textTransform: 'capitalize'}}>Orbital period: {Data.orbital_period}</p>
+                            <p style={{textTransform: 'capitalize'}}>Diameter: {Data.diameter}</p>
+                            <p style={{textTransform: 'capitalize'}}>Climate: {Data.climate}</p>
                             <p>Gravity: {Data.gravity} kg</p>
-                            <p>Terrain: {Data.terrain}</p>
-                            <p>Surface water: {Data.surface_water}</p>
-                            <p>Population: {Data.population}</p>
+                            <p style={{textTransform: 'capitalize'}}>Terrain: {Data.terrain}</p>
+                            <p style={{textTransform: 'capitalize'}}>Surface water: {Data.surface_water}</p>
+                            <p style={{textTransform: 'capitalize'}}>Population: {Data.population}</p>
                         </div>
-                        <div className="d-flex align-content-center justify-content-center flex-wrap m-5">
+                        <div className="list-group flex-wrap m-5">
                             <div className="m-5">
                                 {Data.residents.length > 0 && (
                                     <>
@@ -42,7 +42,7 @@ const OnePlanet = () => {
                                         <ListGroup className="m-2">
                                             {Data.residents.map((data:ResidentsType) => 
                                                 <ListGroup.Item 
-                                                    className="m-3"
+                                                    className="item"
                                                     action
                                                     as={Link}
                                                     key={data.id}
@@ -60,7 +60,7 @@ const OnePlanet = () => {
                                         <ListGroup className="m-2">
                                             {Data.films.map((data:ModelFilmType) => 
                                                 <ListGroup.Item 
-                                                    className="m-3"
+                                                    className="item"
                                                     action
                                                     as={Link}
                                                     key={data.id}
@@ -72,6 +72,8 @@ const OnePlanet = () => {
                                 )}
                             </div>
                         </div>
+                        <p className="muted">Created: {Data.created}</p>
+                        <p className="muted">Edited: {Data.edited}</p>
 		            </div>
 			    </>
 			)}
