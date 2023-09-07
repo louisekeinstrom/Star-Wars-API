@@ -16,7 +16,7 @@ const Films = () => {
 			<h1 className='d-flex mb-5 mt-5 align-content-center justify-content-center'>Films</h1>
 			<div className='d-flex-column m-2 justify-content-center'>
 			
-				{isLoading && <Spinner className='d-flex align-content-center justify-content-center' animation="grow" variant="dark"/>}
+				{isLoading && <Spinner className='spinner d-flex align-content-center justify-content-center' animation="grow" variant="alert"/>}
 				
 				{isError === true && <Alert variant="warning">{error}</Alert>}
 				

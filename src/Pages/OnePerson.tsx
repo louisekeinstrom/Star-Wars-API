@@ -18,7 +18,7 @@ const OnePerson = () => {
 	
 	return(
 		<>
-			{isLoading && <Spinner className='d-flex align-content-center justify-content-center' animation="grow" variant="dark"/>}
+			{isLoading && <Spinner className='spinner d-flex align-content-center justify-content-center' animation="grow" variant="alert"/>}
 			
 			{isError === true && <Alert variant="warning">{error}</Alert>}
 			

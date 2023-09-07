@@ -90,3 +90,22 @@ p, .nav-bar {
     justify-content: center;
     font-size: x-large;
 }
+
+.spinner {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    align-content: center;
+}
+
+.go-back-btn {
+    color: white;
+    font-family: 'Cairo', sans-serif;
+    padding: 10px;
+}
+
+.go-back-btn:hover {
+    background-color: gold;
+    color: black;
+
+}
