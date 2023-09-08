@@ -5,7 +5,7 @@ const HomePage = () => {
 
 	return (
 		<>
-			<h1 className='d-flex mb-5 mt-5 align-content-center justify-content-center'>Welcome You Are...</h1>
+			<h1 className='d-flex text-center mb-5 mt-5 align-content-center justify-content-center'>Welcome to the Star Wars Encyclopedia!</h1>
 
 			<div className='home-page-menu' style={{width: '100%'}}>
 				<div className='m-2'>

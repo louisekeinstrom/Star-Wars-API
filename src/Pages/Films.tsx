@@ -9,8 +9,10 @@ import Spinner from 'react-bootstrap/Spinner'
 
 const Films = () => {
 	const [page, setPage] = useState(1)
-	const { allData, isLoading, isError, error } = useGetAllData<FilmResponse>("films")
-	
+	const { allData, 
+			isLoading, 
+			isError, 
+			error } = useGetAllData<FilmResponse>(`/films?page=${page}`)
 	return(
 		<>
 			<h1 className='d-flex mb-5 mt-5 align-content-center justify-content-center'>Films</h1>
@@ -25,10 +27,11 @@ const Films = () => {
 						<div className='d-flex flex-row flex-wrap align-item-center justify-content-center'>
 							{allData.data.map((Film:FilmType) => {
 								return(
-									<Card className='Star-Wars-Card m-3' style={{ width: '25%' }} key={Film.id}>
+									<Card className='d-flex flex-wrap Star-Wars-Card m-3' style={{ width: '25%', minWidth: '250px' }} key={Film.id}>
 										<Card.Header className='Star-Wars-Text mb-2'>{Film.title}</Card.Header>
 										<Card.Body>
-											<Card.Text>{Film.opening_crawl}</Card.Text>
+											<Card.Text>Release date: {Film.release_date}</Card.Text>
+											<Card.Text>Directed by: {Film.director}</Card.Text>
 										</Card.Body>
 										<Card.Link as={Link} to={"/films/" + Film.id}>
 											<Button className='read-more-btn m-3' 
@@ -41,15 +44,15 @@ const Films = () => {
 								)
 							})}
 						</div>
-						<div className='m-5'>
-							<Pagination
-								page={page}
-								totalPages={allData.last_page}
-								hasPreviousPage={page > 0}
-								hasNextPage={page + 1 < allData.last_page}
-								onPreviousPage={() => { setPage(prevValue => prevValue - 1) }}
-								onNextPage={() => { setPage(prevValue => prevValue + 1) }}
-								/>
+						<div className='p-3 m-5 d-flex flex-row justify-content-center align-content-center'>
+						<Pagination
+							pageNumb={allData?.current_page}
+							totalPages={allData.last_page}
+							hasPreviousPage={page > 1}
+							hasNextPage={page < allData.last_page}
+							onPreviousPage={() => { setPage(preValue => preValue - 1) }}
+							onNextPage={() => { setPage(preValue => preValue + 1) }}
+                		/>
 						</div>
 					</>
 				)}

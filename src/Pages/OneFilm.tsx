@@ -21,22 +21,20 @@ const OneFilm = () => {
 			
 			{Data && (
                 <>
-			        <h1 className='d-flex mb-5 mt-5 align-content-center justify-content-center'>{Data.title}</h1>
-			        <div className='d-flex-column m-2 justify-content-center'>
-                        <div className="information">
-                            <p className="p-5">{Data.opening_crawl}</p>
-                            <h2>General information</h2>
-                            <p style={{textTransform: 'capitalize'}}>Released: {Data.release_date}</p>
-                            <p style={{textTransform: 'capitalize'}}>Director: {Data.director}</p>
-                            <p style={{textTransform: 'capitalize'}}>Producer: {Data.producer}</p>
-                        </div>
-                        <div className="list-group flex-wrap m-5">
+                    <div className='d-flex flex-column text-center align-content-center justify-content-center'>
+                        <h1 className='mb-5 mt-5'>{Data.title}</h1>
+                        <p style={{minWidth: '250px'}}>{Data.opening_crawl}</p>
+                        <h2 className="p-4 text-center">General information</h2>
+                        <p style={{textTransform: 'capitalize'}}>Released: {Data.release_date}</p>
+                        <p style={{textTransform: 'capitalize'}}>Director: {Data.director}</p>
+                        <p style={{textTransform: 'capitalize'}}>Producer: {Data.producer}</p>
+                        <div className="p-2 list-group d-flex flex-column align-content-center justify-content-center">
                             <ListGroup>
-                                <div className="m-5">
+                                <div className="p-2 d-flex flex-column text-center align-content-center justify-content-center">
                                     {Data.characters.length > 0 && (
                                         <>
-                                            <h2 key={Data.id}>Characters: </h2>
-                                            <ListGroup className="m-2">
+                                            <h2 className="d-flex text-center align-content-center justify-content-center" key={Data.id}>Characters: </h2>
+                                            <ListGroup className="d-flex text-center align-content-center justify-content-center" style={{minWidth: '200px', maxWidth: '400px'}}>
                                                 {Data.characters.map((data:ModelType) => 
                                                     <ListGroup.Item 
                                                         className="item"
@@ -52,11 +50,11 @@ const OneFilm = () => {
                                 </div>
                             </ListGroup>
                             <ListGroup>
-                                <div className="m-5">
+                                <div className="p-2 d-flex flex-column text-center align-content-center justify-content-center">
                                     {Data.vehicles.length > 0 && (
                                         <>
-                                            <h2 key={Data.id}>Vehicles: </h2>
-                                            <ListGroup className="m-2">
+                                            <h2 className="d-flex text-center align-content-center justify-content-center" key={Data.id}>Vehicles: </h2>
+                                            <ListGroup className="d-flex text-center align-content-center justify-content-center" style={{minWidth: '200px', maxWidth: '400px'}}>
                                                 {Data.vehicles.map((data:ModelType) => 
                                                     <ListGroup.Item 
                                                         className="item"
@@ -72,11 +70,11 @@ const OneFilm = () => {
                                 </div>
                             </ListGroup>
                             <ListGroup>
-                                <div className="m-5">
+                                <div className="p-2 d-flex flex-column text-center align-content-center justify-content-center">
                                     {Data.planets.length > 0 && (
                                         <>
                                             <h2 key={Data.id}>Planets: </h2>
-                                            <ListGroup className="m-2">
+                                            <ListGroup className="d-flex text-center align-content-center justify-content-center" style={{minWidth: '200px', maxWidth: '400px'}}>
                                                 {Data.planets.map((data:ModelType) => 
                                                     <ListGroup.Item 
                                                         className="item"
@@ -92,11 +90,11 @@ const OneFilm = () => {
                                 </div>
                             </ListGroup>
                             <ListGroup>
-                                <div className="m-5">
+                                <div className="p-2 d-flex flex-column text-center align-content-center justify-content-center">
                                     {Data.vehicles.length > 0 && (
                                         <>
                                             <h2 key={Data.id}>Species: </h2>
-                                            <ListGroup className="m-2">
+                                            <ListGroup className="d-flex text-center align-content-center justify-content-center" style={{minWidth: '200px', maxWidth: '400px'}}>
                                                 {Data.species.map((data:ModelType) => 
                                                     <ListGroup.Item 
                                                         className="item"
@@ -112,11 +110,11 @@ const OneFilm = () => {
                                 </div>
                             </ListGroup>
                             <ListGroup>
-                                <div className="m-5">
+                                <div className="p-2 d-flex flex-column text-center align-content-center justify-content-center">
                                     {Data.starships.length > 0 && (
                                         <>
                                             <h2 key={Data.id}>Starships: </h2>
-                                            <ListGroup className="m-2">
+                                            <ListGroup className="d-flex text-center align-content-center justify-content-center" style={{minWidth: '200px', maxWidth: '400px'}}>
                                                 {Data.starships.map((data:ModelType) => 
                                                     <ListGroup.Item 
                                                         className="item"
@@ -132,9 +130,9 @@ const OneFilm = () => {
                                 </div>
                             </ListGroup>
                         </div>
-                        <p className="muted">Created: {Data.created}</p>
-                        <p className="muted">Edited: {Data.edited}</p>
-		            </div>
+                            <p className="muted">Created: {Data.created}</p>
+                            <p className="muted">Edited: {Data.edited}</p>
+                        </div>
 			    </>
 			)}
 		</>

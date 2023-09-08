@@ -1,6 +1,5 @@
 import { useState } from 'react'
 import Button from 'react-bootstrap/Button'
-import { useParams } from "react-router"
 import { PeopleResponse, PeopleType } from '../types'
 import useGetAllData from '../hooks/useGetAllData'
 import { Card } from 'react-bootstrap'
@@ -10,17 +9,16 @@ import { Alert } from 'react-bootstrap'
 import Spinner from 'react-bootstrap/Spinner'
 
 const People = () => {
-	const { id } = useParams()
-	const dataId = Number(id)
 	const [page, setPage] = useState(1)
-	const { allData, isError, isLoading, error } = useGetAllData<PeopleResponse>(`/people?page=${page}`)
-	
-	console.log("pagenr", page)
-	console.log("data",allData)
+	const { allData, 
+			isError, 
+			isLoading, 
+			error } = useGetAllData<PeopleResponse>(`/people?page=${page}`)
 
 	return (
 		<>
 			<h1 className='d-flex mb-5 mt-5 align-content-center justify-content-center'>People</h1>
+			<div className='d-flex-column m-2 justify-content-center'>
 
 			{isLoading && <Spinner className='spinner d-flex align-content-center justify-content-center' animation="grow" variant="alert"/>}
 
@@ -28,11 +26,10 @@ const People = () => {
 
 			{allData && (
 				<>
-					<div>
 						<div className='d-flex flex-row flex-wrap align-item-center justify-content-center'>
 							{allData.data.map((person:PeopleType) => {
 								return(
-									<Card className='Star-Wars-Card m-3' style={{ width: '25%' }} key={person.id}>
+									<Card className='d-flex flex-wrap Star-Wars-Card m-3' style={{ width: '25%', minWidth: '250px' }} key={person.id}>
 										<Card.Header className='Star-Wars-Text mb-2'>{person.name}</Card.Header>
 										<Card.Body>
 											<Card.Text>Homeworld: {person.homeworld.name}</Card.Text>
@@ -50,19 +47,19 @@ const People = () => {
 								)
 							})}
 						</div>
-					</div>
-					<div className='m-5'>
+					<div className='p-3 m-5 d-flex flex-row justify-content-center align-content-center'>
 						<Pagination
-							page={page}
-							totalPages={allData.last_page}
-							hasPreviousPage={page > 0}
-							hasNextPage={page + 1 < allData.last_page}
-							onPreviousPage={() => { setPage(prevValue => prevValue - 1) }}
-							onNextPage={() => {setPage(prevValue => prevValue + 1)}}
+								pageNumb={allData.current_page}
+								totalPages={allData.last_page}
+								hasPreviousPage={page > 1}
+								hasNextPage={page < allData.last_page}
+								onPreviousPage={() => { setPage(preValue => preValue - 1) }}
+								onNextPage={() => { setPage(preValue => preValue + 1) }}
 						/>
 					</div>
 				</>
 			)}
+			</div>
 		</>
 	)
 }

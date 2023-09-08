@@ -24,27 +24,25 @@ const OneSpecies = () => {
 			
 			{Data && (
                 <>
-			        <h1 className='d-flex mb-5 mt-5 align-content-center justify-content-center'>{Data.name}</h1>
-			        <div className='d-flex-column m-2 justify-content-center'>
-                        <div className="information">
-                            <h2>Species information</h2>
-                            <p style={{textTransform: 'capitalize'}}>Classification: {Data.classification}</p>
-                            <p style={{textTransform: 'capitalize'}}>Designation: {Data.designation}</p>
-                            <p>Average height: {Data.average_height} cm</p>
-                            <p>Average Lifespan: {Data.average_lifespan} years</p>
-                            <p style={{textTransform: 'capitalize'}}>Eye colors: {Data.eye_colors}</p>
-                            <p style={{textTransform: 'capitalize'}}>Skin colors: {Data.skin_colors}</p>
-                            <p style={{textTransform: 'capitalize'}}>Hair colors: {Data.hair_colors}</p>
-                            <p style={{textTransform: 'capitalize'}}>Language: {Data.language}</p>
-                            {!Data.homeworld === null && (<p>Homeworld: {Data.homeworld!.name}</p>)}
-                        </div>
-                        <div className="list-group flex-wrap m-5">
+			        <div className='d-flex flex-column text-center align-content-center justify-content-center'>
+			            <h1 className='d-flex mb-5 mt-5 align-content-center justify-content-center'>{Data.name}</h1>
+                        <h2 className="p-4 text-center">Species information</h2>
+                        <p style={{textTransform: 'capitalize'}}>Classification: {Data.classification}</p>
+                        <p style={{textTransform: 'capitalize'}}>Designation: {Data.designation}</p>
+                        <p>Average height: {Data.average_height} cm</p>
+                        <p>Average Lifespan: {Data.average_lifespan} years</p>
+                        <p style={{textTransform: 'capitalize'}}>Eye colors: {Data.eye_colors}</p>
+                        <p style={{textTransform: 'capitalize'}}>Skin colors: {Data.skin_colors}</p>
+                        <p style={{textTransform: 'capitalize'}}>Hair colors: {Data.hair_colors}</p>
+                        <p style={{textTransform: 'capitalize'}}>Language: {Data.language}</p>
+                        {!Data.homeworld === null && (<p>Homeworld: {Data.homeworld!.name}</p>)}
+                        <div className="p-2 list-group d-flex flex-column align-content-center justify-content-center">
                             <ListGroup>
-                                <div className="m-5">
+                                <div className="p-2 d-flex flex-column text-center align-content-center justify-content-center">
                                     {Data.people.length > 0 && (
                                         <>
-                                            <h2 key={Data.id}>People: </h2>
-                                            <ListGroup className="m-2">
+                                            <h2 className="d-flex text-center align-content-center justify-content-center" key={Data.id}>People: </h2>
+                                            <ListGroup className="d-flex text-center align-content-center justify-content-center" style={{minWidth: '200px', maxWidth: '400px'}}>
                                                 {Data.people.map((data:ModelType) => 
                                                     <ListGroup.Item 
                                                         className="item"
@@ -60,11 +58,11 @@ const OneSpecies = () => {
                                 </div>
                             </ListGroup>
                             <ListGroup>
-                                <div className="m-5">
+                                <div className="p-2 d-flex flex-column text-center align-content-center justify-content-center">
                                     {Data.films.length > 0 && (
                                         <>
-                                            <h2 key={Data.id}>Films: </h2>
-                                            <ListGroup className="m-2">
+                                            <h2 className="d-flex text-center align-content-center justify-content-center" key={Data.id}>Films: </h2>
+                                            <ListGroup className="d-flex text-center align-content-center justify-content-center" style={{minWidth: '200px', maxWidth: '400px'}}>
                                                 {Data.films.map((data:ModelFilmType) => 
                                                     <ListGroup.Item 
                                                         className="item"

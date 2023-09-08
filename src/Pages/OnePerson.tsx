@@ -24,26 +24,24 @@ const OnePerson = () => {
 			
 			{Data && (
                 <>
-			        <h1 className='d-flex mb-5 mt-5 align-content-center justify-content-center'>{Data.name}</h1>
-			        <div className='d-flex-column m-2 justify-content-center'>
-                        <div className="information">
-                            <h2>Personal information</h2>
-                            <p>Birth year: {Data.birth_year}</p>
-                            <p style={{textTransform: 'capitalize'}}>Eye color: {Data.eye_color}</p>
-                            <p style={{textTransform: 'capitalize'}}>Hair color: {Data.hair_color}</p>
-                            <p>Height: {Data.height} cm</p>
-                            <p>Mass: {Data.mass} kg</p>
-                            <p style={{textTransform: 'capitalize'}}>Skin color: {Data.skin_color}</p>
-                            <p style={{textTransform: 'capitalize'}}>Hair color: {Data.hair_color}</p>
-                            {!Data.homeworld === null && (<p>Homeworld: {Data.homeworld!.name}</p>)}
-                        </div>
-                        <div className="list-group flex-wrap m-5">
+			        <div className='d-flex flex-column text-center align-content-center justify-content-center'>
+			            <h1 className='d-flex mb-5 mt-5 align-content-center justify-content-center'>{Data.name}</h1>
+                        <h2 className="p-4 text-center">Personal information</h2>
+                        <p>Birth year: {Data.birth_year}</p>
+                        <p style={{textTransform: 'capitalize'}}>Eye color: {Data.eye_color}</p>
+                        <p style={{textTransform: 'capitalize'}}>Hair color: {Data.hair_color}</p>
+                        <p>Height: {Data.height} cm</p>
+                        <p>Mass: {Data.mass} kg</p>
+                        <p style={{textTransform: 'capitalize'}}>Skin color: {Data.skin_color}</p>
+                        <p style={{textTransform: 'capitalize'}}>Hair color: {Data.hair_color}</p>
+                        {!Data.homeworld === null && (<p>Homeworld: {Data.homeworld!.name}</p>)}
+                        <div className="p-2 list-group d-flex flex-column align-content-center justify-content-center">
                             <ListGroup>
-                                <div className="m-5">
+                                <div className="p-2 d-flex flex-column text-center align-content-center justify-content-center">
                                     {Data.films.length > 0 && (
                                         <>
-                                            <h2 key={Data.id}>Films: </h2>
-                                            <ListGroup className="m-2">
+                                            <h2 className="d-flex text-center align-content-center justify-content-center" key={Data.id}>Films: </h2>
+                                            <ListGroup className="d-flex text-center align-content-center justify-content-center" style={{minWidth: '200px', maxWidth: '400px'}}>
                                                 {Data.films.map((data:ModelFilmType) => 
                                                     <ListGroup.Item 
                                                         className="item"
@@ -59,11 +57,11 @@ const OnePerson = () => {
                                 </div>
                             </ListGroup>
                             <ListGroup>
-                                <div className="m-5">
+                                <div className="p-2 d-flex flex-column text-center align-content-center justify-content-center">
                                     {Data.species.length > 0 && (
                                         <>
-                                            <h2 key={Data.id}>Species: </h2>
-                                            <ListGroup className="m-2">
+                                            <h2 className="d-flex text-center align-content-center justify-content-center" key={Data.id}>Species: </h2>
+                                            <ListGroup className="d-flex text-center align-content-center justify-content-center" style={{minWidth: '200px', maxWidth: '400px'}}>
                                                 {Data.species.map((data:ModelType) => 
                                                     <ListGroup.Item 
                                                         className="item"
@@ -79,11 +77,11 @@ const OnePerson = () => {
                                 </div>
                             </ListGroup>
                             <ListGroup>
-                                <div className="m-5">
+                                <div className="p-2 d-flex flex-column text-center align-content-center justify-content-center">
                                     {Data.starships.length > 0 && (
                                         <>
-                                            <h2 key={Data.id}>Starships: </h2>
-                                            <ListGroup className="m-2">
+                                            <h2 className="d-flex text-center align-content-center justify-content-center" key={Data.id}>Starships: </h2>
+                                            <ListGroup className="d-flex text-center align-content-center justify-content-center" style={{minWidth: '200px', maxWidth: '400px'}}>
                                                 {Data.starships.map((data:ModelType) => 
                                                     <ListGroup.Item 
                                                         className="item"
@@ -97,13 +95,13 @@ const OnePerson = () => {
                                         </>
                                     )}
                                 </div>
-                                </ListGroup>
+                            </ListGroup>
                             <ListGroup>
-                                <div className="m-5">
+                                <div className="p-2 d-flex flex-column text-center align-content-center justify-content-center">
                                     {Data.vehicles.length > 0 && (
                                         <>
-                                            <h2 key={Data.id}>Vehicles: </h2>
-                                            <ListGroup className="m-2">
+                                            <h2 className="d-flex text-center align-content-center justify-content-center" key={Data.id}>Vehicles: </h2>
+                                            <ListGroup className="d-flex text-center align-content-center justify-content-center" style={{minWidth: '200px', maxWidth: '400px'}}>
                                                 {Data.vehicles.map((data:ModelType) => 
                                                     <ListGroup.Item 
                                                         className="item"

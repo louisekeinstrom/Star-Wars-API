@@ -2,7 +2,7 @@ import React from 'react'
 import Button from 'react-bootstrap/Button'
 
 interface IPaginationProps {
-	page: number
+	pageNumb: number
 	totalPages: number
 	hasPreviousPage: boolean
 	hasNextPage: boolean
@@ -11,7 +11,7 @@ interface IPaginationProps {
 }
 
 const Pagination: React.FC<IPaginationProps> = ({
-	page,
+	pageNumb,
 	totalPages,
 	hasPreviousPage,
 	hasNextPage,
@@ -20,16 +20,16 @@ const Pagination: React.FC<IPaginationProps> = ({
 }) => {
 	return (
 		<div className="d-flex justify-content-between align-items-center">
-			<div className="prev">
-				<Button
-					disabled={!hasPreviousPage}
-					onClick={onPreviousPage}
-					variant="outline-secondary">
+            <div className="prev">
+                <Button
+                    disabled={!hasPreviousPage}
+                    onClick={onPreviousPage}
+                    variant="outline-secondary">
                         Previous Page
                 </Button>
-			</div>
-			<div className="page">
-                Page {page}/{totalPages}
+            </div>
+            <div className="page p-3">
+                Page {pageNumb}/{totalPages}
             </div>
             <div className="next">
                 <Button
@@ -39,7 +39,7 @@ const Pagination: React.FC<IPaginationProps> = ({
                         Next Page
                 </Button>
             </div>
-		    </div>
+		</div>
 	)
 }
 

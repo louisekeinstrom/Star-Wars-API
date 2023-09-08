@@ -24,7 +24,7 @@ function App() {
 
       <div id="App">
         <Navigation/>
-        <Container id="container">
+        <Container id="container" className="p-2" style={{width: "70%"}}>
           <Routes>
             <Route path="/" element={<HomePage/>}/>
             <Route path="/films" element={<Films/>}/>

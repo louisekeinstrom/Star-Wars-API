@@ -29,9 +29,7 @@ p, .nav-bar {
 }
 
 #container {
-    width: 70%;
     background-color: black;
-    padding: 20px;
 }
 
 .Star-Wars-Card {
@@ -71,16 +69,10 @@ p, .nav-bar {
     background-color: gold;
 }
 
-.information {
-    text-align: center;
-    padding: 30px;
-}
-
 .list-group {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    width: 90%;
 }
 
 .home-page-menu {
@@ -89,6 +81,7 @@ p, .nav-bar {
     align-items: center;
     justify-content: center;
     font-size: x-large;
+    flex-wrap: wrap;
 }
 
 .spinner {
@@ -96,16 +89,4 @@ p, .nav-bar {
     align-items: center;
     justify-content: center;
     align-content: center;
-}
-
-.go-back-btn {
-    color: white;
-    font-family: 'Cairo', sans-serif;
-    padding: 10px;
-}
-
-.go-back-btn:hover {
-    background-color: gold;
-    color: black;
-
 }
