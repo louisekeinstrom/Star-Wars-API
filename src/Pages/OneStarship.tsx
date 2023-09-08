@@ -10,7 +10,6 @@ const OneStarship = () => {
 	const dataId = Number(id)
 	const { Data, isLoading, isError, error } = useGetOneObject<OneStarshipResponse>(`starships/${dataId}`)
 
-	console.log(Data)
 	
 	return(
 		<>

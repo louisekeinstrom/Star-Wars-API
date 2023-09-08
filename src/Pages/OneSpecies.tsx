@@ -12,10 +12,7 @@ const OneSpecies = () => {
             isLoading, 
             isError, 
             error } = useGetOneObject<OneSpeciesResponse>(`species/${dataId}`)
-	
 
-	console.log(Data)
-	
 	return(
 		<>
 			{isLoading && <Spinner className='spinner d-flex align-content-center justify-content-center' animation="grow" variant="alert"/>}

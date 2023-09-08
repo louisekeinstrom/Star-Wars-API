@@ -1,17 +1,3 @@
-export type SearchHit = {
-    id: number
-    created_at: string
-    name: string
-}
-
-export type SearchResponse = {
-    hits: PeopleType
-    nbHits: number
-    page: number
-    nbPages: number
-    hitsPerPage: number
-}
-
 export type OnePersonResponse = {
     id: number
     name: string

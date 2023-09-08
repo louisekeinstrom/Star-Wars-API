@@ -12,9 +12,6 @@ const OnePerson = () => {
             isLoading, 
             isError, 
             error } = useGetOneObject<OnePersonResponse>(`people/${dataId}`)
-    
-
-	console.log(Data)
 	
 	return(
 		<>
