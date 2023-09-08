@@ -1,5 +1,5 @@
 import * as StarWarsAPI from '../services/StarWarsAPI'
-import { useState, useEffect, useCallback } from "react"
+import { useState, useEffect } from "react"
 
 const useGetAllData = <T>(endpoint:string) => {
     const [allData, setAllData] = useState<T | null>(null)
@@ -8,7 +8,7 @@ const useGetAllData = <T>(endpoint:string) => {
     const [isError, setIsError] = useState(false)
     const [isLoading, setIsLoading] = useState(false)
     
-    const getAllTheData = async (endpoint:string, page:number) => {
+    const getAllTheData = async (endpoint:string) => {
         setError(null)
 		setIsError(false)
 		setIsLoading(true)
@@ -34,9 +34,9 @@ const useGetAllData = <T>(endpoint:string) => {
     
         useEffect(() => {
 
-            getAllTheData(endpoint, page)
+            getAllTheData(endpoint)
         
-        }, [endpoint, page])
+        }, [endpoint])
     
     return {
         allData,
