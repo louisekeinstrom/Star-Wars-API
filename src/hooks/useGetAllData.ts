@@ -1,51 +1,46 @@
-import * as StarWarsAPI from '../services/StarWarsAPI'
-import { useState, useEffect } from "react"
+import * as StarWarsAPI from "../Services/StarWarsAPI";
+import { useState, useEffect } from "react";
 
-const useGetAllData = <T>(endpoint:string) => {
-    const [allData, setAllData] = useState<T | null>(null)
-    const [page, setPage] = useState(1)
-    const [error, setError] = useState<string | null>(null)
-    const [isError, setIsError] = useState(false)
-    const [isLoading, setIsLoading] = useState(false)
-    
-    const getAllTheData = async (endpoint:string) => {
-        setError(null)
-		setIsError(false)
-		setIsLoading(true)
-        setAllData(null)
-        
-        try{
-            const res = await StarWarsAPI.getAllData<T>(endpoint)
-            setAllData(res)
-        
-        }catch(err:any){
-            setError(err.message)
-            setIsError(true)
-        }
+const useGetAllData = <T>(endpoint: string) => {
+	const [allData, setAllData] = useState<T | null>(null);
+	const [page, setPage] = useState(1);
+	const [error, setError] = useState<string | null>(null);
+	const [isError, setIsError] = useState(false);
+	const [isLoading, setIsLoading] = useState(false);
 
-        setIsLoading(false)
-    
-    }
+	const getAllTheData = async (endpoint: string) => {
+		setError(null);
+		setIsError(false);
+		setIsLoading(true);
+		setAllData(null);
 
-        const changePageFn = (value: number) => {
-            setPage(page + value)
+		try {
+			const res = await StarWarsAPI.getAllData<T>(endpoint);
+			setAllData(res);
+		} catch (err: any) {
+			setError(err.message);
+			setIsError(true);
+		}
 
-        }
-    
-        useEffect(() => {
+		setIsLoading(false);
+	};
 
-            getAllTheData(endpoint)
-        
-        }, [endpoint])
-    
-    return {
-        allData,
-        error,
+	const changePageFn = (value: number) => {
+		setPage(page + value);
+	};
+
+	useEffect(() => {
+		getAllTheData(endpoint);
+	}, [endpoint]);
+
+	return {
+		allData,
+		error,
 		isError,
 		isLoading,
-        page,
-        changePageFn
-    }
-}
+		page,
+		changePageFn,
+	};
+};
 
-export default useGetAllData
+export default useGetAllData;
